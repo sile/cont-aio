@@ -52,7 +52,7 @@ trait AsyncInput extends InputStream {
  val in = new BufferedInputStream(System.in) with AsyncInput
 
  println("before reset")
- reset {
+ AsyncContext.begin {
    val len = in.asyncRead(buf)
    println("len: "+len)
    println("bytes: " + buf)
