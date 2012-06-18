@@ -7,14 +7,21 @@ class HttpServer {
     val serverSocket = new ServerSocket(port)
     println("start: " + serverSocket)
     
+    try {
 //    while(true) {
       val clientSocket = serverSocket.accept()
+      try {
       println("accept: " + clientSocket)
 
       val request = HttpRequest(clientSocket.getInputStream)
-    println(request)
+      } finally {
+        clientSocket.close
+      }
       // TODO:
 //    }
+    } finally {
+      serverSocket.close
+    }
   }
 
   def startAsync(port:Int) {
